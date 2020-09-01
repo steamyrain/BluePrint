@@ -8,13 +8,13 @@ import java.util.*
 @Entity(tableName = "topping_table")
 data class ToppingEntity constructor(
     @PrimaryKey
-    val id: String,
+    val id: Int,
 
     @ColumnInfo(name = "topping_name")
     val name: String,
 
     @ColumnInfo(name = "date_added")
-    val cteatedDate: Date,
+    val cteatedDate: Date?,
 
     @ColumnInfo(name = "status")
     val status: String

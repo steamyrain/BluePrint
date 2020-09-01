@@ -4,14 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.rain.blueprint.database.combo.ComboEntity
 import com.rain.blueprint.database.mainmenu.MainMenuEntity
 import com.rain.blueprint.database.topping.ToppingEntity
+import com.rain.blueprint.utils.Converters
 
 @Database(
-    entities = [MainMenuEntity::class, ToppingEntity::class],
+    entities = [MainMenuEntity::class, ToppingEntity::class, ComboEntity::class],
     version = 1,
     exportSchema = false
 )
+@TypeConverters(Converters::class)
 abstract class OrderDatabase : RoomDatabase() {
     companion object {
         /***

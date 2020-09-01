@@ -8,7 +8,7 @@ import java.util.*
 @Entity(tableName = "main_menu_table")
 data class MainMenuEntity constructor(
     @PrimaryKey(autoGenerate = true)
-    val id: String,
+    val id: Int,
 
     @ColumnInfo(name = "menu_name")
     val name: String,
