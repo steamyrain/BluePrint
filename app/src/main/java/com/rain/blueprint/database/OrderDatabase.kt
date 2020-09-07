@@ -13,7 +13,7 @@ import com.rain.blueprint.utils.Converters
 @Database(
     entities = [MainMenuEntity::class, ToppingEntity::class, ComboEntity::class],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 @TypeConverters(Converters::class)
 abstract class OrderDatabase : RoomDatabase() {

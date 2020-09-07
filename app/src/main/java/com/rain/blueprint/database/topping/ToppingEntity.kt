@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity(tableName = "topping_table")
 data class ToppingEntity constructor(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
 
     @ColumnInfo(name = "topping_name")
