@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "02faae0bf406050b93597624cfe6495f",
+    "identityHash": "4929942a3d819998c77fb0fd6b7f13f2",
     "entities": [
       {
         "tableName": "main_menu_table",
@@ -44,7 +44,7 @@
       },
       {
         "tableName": "topping_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `topping_name` TEXT NOT NULL, `date_added` INTEGER, `status` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `topping_name` TEXT NOT NULL, `date_added` INTEGER NOT NULL, `status` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -62,7 +62,7 @@
             "fieldPath": "cteatedDate",
             "columnName": "date_added",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "status",
@@ -134,7 +134,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '02faae0bf406050b93597624cfe6495f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4929942a3d819998c77fb0fd6b7f13f2')"
     ]
   }
 }

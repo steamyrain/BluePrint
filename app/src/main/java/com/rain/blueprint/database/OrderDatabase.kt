@@ -1,14 +1,19 @@
 package com.rain.blueprint.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.rain.blueprint.database.combo.ComboEntity
 import com.rain.blueprint.database.mainmenu.MainMenuEntity
 import com.rain.blueprint.database.topping.ToppingEntity
 import com.rain.blueprint.utils.Converters
+
+@Dao
+interface OrderDao {
+    @Query("select m.menu_name as menuName, t.topping_name as toppingName from main_menu_table as m inner join combo_table as c on c.menu_id == m.id inner join topping_table as t on t.id == c.topping_id where t.id = 1 LIMIT 1")
+    fun getCombos(): MenuTopping
+
+    data class MenuTopping(val menuName: String?, val toppingName: String?)
+}
 
 @Database(
     entities = [MainMenuEntity::class, ToppingEntity::class, ComboEntity::class],
@@ -17,6 +22,9 @@ import com.rain.blueprint.utils.Converters
 )
 @TypeConverters(Converters::class)
 abstract class OrderDatabase : RoomDatabase() {
+
+    abstract val orderDao: OrderDao
+
     companion object {
         /***
          * Volatile - value from @Volatile never cached, read & write done from
@@ -39,8 +47,9 @@ abstract class OrderDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         OrderDatabase::class.java,
-                        "blueprint_database"
+                        "sample.db"
                     )
+                        .createFromAsset("databases/sample.db")
                         .fallbackToDestructiveMigration()
                         .build()
                 }

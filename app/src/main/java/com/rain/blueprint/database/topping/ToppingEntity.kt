@@ -14,7 +14,7 @@ data class ToppingEntity constructor(
     val name: String,
 
     @ColumnInfo(name = "date_added")
-    val cteatedDate: Date?,
+    val cteatedDate: Date,
 
     @ColumnInfo(name = "status")
     val status: String
