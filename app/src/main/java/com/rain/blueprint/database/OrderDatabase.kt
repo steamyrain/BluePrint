@@ -1,6 +1,7 @@
 package com.rain.blueprint.database
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.rain.blueprint.database.combo.ComboEntity
 import com.rain.blueprint.database.mainmenu.MainMenuEntity
@@ -9,10 +10,14 @@ import com.rain.blueprint.utils.Converters
 
 @Dao
 interface OrderDao {
+    @Query("select id as menuId, menu_name as menuName from main_menu_table order by menu_name asc")
+    fun getMenus(): LiveData<List<MainMenu>>
+
     @Query("select m.menu_name as menuName, t.topping_name as toppingName from main_menu_table as m inner join combo_table as c on c.menu_id == m.id inner join topping_table as t on t.id == c.topping_id where t.id = 1 LIMIT 1")
     fun getCombos(): MenuTopping
 
     data class MenuTopping(val menuName: String?, val toppingName: String?)
+    data class MainMenu(val menuId: String?, val menuName: String?)
 }
 
 @Database(
