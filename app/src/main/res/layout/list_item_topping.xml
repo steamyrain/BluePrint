@@ -6,30 +6,23 @@
     <data>
 
         <variable
-            name="menu"
-            type="com.rain.blueprint.database.OrderDao.MainMenu" />
-
-        <variable
-            name="clickListener"
-            type="com.rain.blueprint.ui.main.MenuToppingListener" />
+            name="topping"
+            type="com.rain.blueprint.database.OrderDao.MenuTopping" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="@{() -> clickListener.onClick(menu)}">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/menu_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{menu.menuName}"
+            android:layout_marginTop="16sp"
+            android:text="@{topping.toppingName}"
             android:textAlignment="center"
-            android:textSize="18sp"
-            android:layout_marginTop="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="menu" />
-
+            tools:text="combo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

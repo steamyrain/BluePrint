@@ -13,11 +13,11 @@ interface OrderDao {
     @Query("select id as menuId, menu_name as menuName from main_menu_table order by menu_name asc")
     fun getMenus(): LiveData<List<MainMenu>>
 
-    @Query("select m.menu_name as menuName, t.topping_name as toppingName from main_menu_table as m inner join combo_table as c on c.menu_id == m.id inner join topping_table as t on t.id == c.topping_id where t.id = 1 LIMIT 1")
-    fun getCombos(): MenuTopping
+    @Query("select t.id as toppingId, t.topping_name as toppingName from main_menu_table as m inner join combo_table as c on c.menu_id == m.id inner join topping_table as t on t.id == c.topping_id where m.id = :menuId")
+    fun getCombos(menuId: Int): LiveData<List<MenuTopping>>
 
-    data class MenuTopping(val menuName: String?, val toppingName: String?)
-    data class MainMenu(val menuId: String?, val menuName: String?)
+    data class MenuTopping(val toppingId: Int?, val toppingName: String?)
+    data class MainMenu(val menuId: Int?, val menuName: String?)
 }
 
 @Database(
@@ -32,7 +32,7 @@ abstract class OrderDatabase : RoomDatabase() {
 
     companion object {
         /***
-         * Volatile - value from @Volatile never cached, read & write done from
+         * Volatile - value from @Volatile never cached (processor cache), read & write done from
          * and to the main memory. Change made by one thread to the shared data are
          * visible to the other threads.
          */

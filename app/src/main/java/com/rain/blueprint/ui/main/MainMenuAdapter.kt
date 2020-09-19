@@ -1,6 +1,5 @@
 package com.rain.blueprint.ui.main
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rain.blueprint.database.OrderDao
 import com.rain.blueprint.databinding.ListItemMainMenuBinding
 
-class MainMenuAdapter :
+class MainMenuAdapter(val clickListener: MenuToppingListener) :
     ListAdapter<OrderDao.MainMenu, RecyclerView.ViewHolder>(MainMenuDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder.from(parent)
@@ -18,9 +17,8 @@ class MainMenuAdapter :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is ViewHolder -> {
-                Log.d("BindViewHolder", "isViewHolder")
                 val menuItem = getItem(position) as OrderDao.MainMenu
-                holder.bind(menuItem)
+                holder.bind(menuItem, clickListener)
             }
         }
     }
@@ -35,8 +33,9 @@ class MainMenuAdapter :
             }
         }
 
-        fun bind(item: OrderDao.MainMenu) {
+        fun bind(item: OrderDao.MainMenu, clickListener: MenuToppingListener) {
             binding.menu = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
     }
@@ -54,4 +53,8 @@ class MainMenuDiffCallback : DiffUtil.ItemCallback<OrderDao.MainMenu>() {
         return oldItem == newItem
     }
 
+}
+
+class MenuToppingListener(val clickListener: (menuId: Int) -> Unit) {
+    fun onClick(menu: OrderDao.MainMenu) = menu.menuId?.let { clickListener(it) }
 }
