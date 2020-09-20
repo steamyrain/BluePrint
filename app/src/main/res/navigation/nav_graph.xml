@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/mainFragment">
-
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.rain.blueprint.ui.main.MainFragment"
-        android:label="MainFragment"
+        android:label="Main Menu"
         tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_detailFragment"
@@ -17,12 +16,14 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.rain.blueprint.ui.detail.DetailFragment"
-        android:label="DetailFragment">
+        android:label="Menu's Toppings"
+        tools:layout="@layout/detail_fragment">
         <argument
             android:name="menuKey"
             app:argType="integer" />
         <action
             android:id="@+id/action_detailFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment" />
     </fragment>
 </navigation>
